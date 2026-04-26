@@ -13,67 +13,39 @@ body {
     color:white;
 }
 
-/* LOGIN */
-#login {
-    display:flex;
-    height:100vh;
-    justify-content:center;
-    align-items:center;
-}
-
-.box {
-    background: rgba(255,255,255,0.05);
-    padding:30px;
-    border-radius:15px;
-    backdrop-filter: blur(10px);
-    text-align:center;
-    width:280px;
-}
-
-input {
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border-radius:8px;
-    border:none;
-}
-
-button {
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    background:#22c55e;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-/* APP */
-#app { display:none; }
-
+/* HEADER */
 .top {
     display:flex;
     justify-content:space-between;
+    align-items:center;
     padding:15px;
     background: rgba(0,0,0,0.3);
 }
 
+h1 {
+    margin:0;
+    font-size:1.5rem;
+}
+
+/* GRID */
 .grid {
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:12px;
+    gap:15px;
     padding:20px;
 }
 
 .btn {
-    padding:20px;
+    padding:25px 15px;
     border-radius:12px;
     text-align:center;
     text-decoration:none;
     color:white;
     font-weight:bold;
     transition:0.2s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .btn:hover {
@@ -96,30 +68,9 @@ button {
 
 <body>
 
-<!-- LOGIN -->
-<div id="login">
-  <div class="box">
-    <h2>💊 Farmacia Pintar</h2>
-
-    <form onsubmit="login(event)">
-        <input id="user" name="username" autocomplete="username" placeholder="Usuario" required>
-        <input id="pass" name="password" type="password" autocomplete="current-password" placeholder="Contraseña" required>
-        <button type="submit">Entrar</button>
-    </form>
-
-    <p id="error"></p>
-  </div>
-</div>
-
-<!-- APP -->
-<div id="app">
-
 <div class="top">
-  <span>👤 Empleado</span>
-  <div>
-    <button onclick="logout()">Salir</button>
+    <h1>💊 Farmacia Pintar</h1>
     <span id="clock"></span>
-  </div>
 </div>
 
 <div class="grid">
@@ -158,59 +109,10 @@ button {
 
 </div>
 
-</div>
-
 <script>
-const USER = "259";
-const PASS = "Farmaco00";
-
-let timeout;
-
-window.onload = () => {
-    if(localStorage.getItem("login") === "ok"){
-        mostrarApp();
-    }
-}
-
-function login(e){
-    e.preventDefault();
-
-    if(user.value === USER && pass.value === PASS){
-        localStorage.setItem("login","ok");
-        mostrarApp();
-    } else {
-        error.innerText = "Datos incorrectos";
-    }
-}
-
-function mostrarApp(){
-    login.style.display="none";
-    app.style.display="block";
-    startTimer();
-}
-
-function logout(){
-    localStorage.removeItem("login");
-    location.reload();
-}
-
-function resetTimer(){
-    clearTimeout(timeout);
-    timeout = setTimeout(()=>{
-        alert("Sesión cerrada por inactividad");
-        logout();
-    }, 600000);
-}
-
-function startTimer(){
-    ["click","mousemove","keypress"].forEach(e=>{
-        document.addEventListener(e,resetTimer);
-    });
-    resetTimer();
-}
-
 setInterval(()=>{
-    clock.innerText = new Date().toLocaleTimeString();
+    document.getElementById("clock").innerText =
+        new Date().toLocaleTimeString();
 },1000);
 </script>
 
