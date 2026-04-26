@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farmacia Pintar</title>
+
+<style>
+body { margin:0; font-family:Arial; background:#0f172a; color:white; }
+
+/* LOGIN */
+#login {
+    display:flex;
+    height:100vh;
+    justify-content:center;
+    align-items:center;
+}
+
+.box {
+    background:#1e293b;
+    padding:30px;
+    border-radius:10px;
+    text-align:center;
+}
+
+input, button {
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+/* APP */
+#app { display:none; }
+
+.top {
+    display:flex;
+    justify-content:space-between;
+    padding:10px;
+}
+
+.grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:10px;
+    padding:20px;
+}
+
+.btn {
+    padding:20px;
+    background:#3b82f6;
+    text-align:center;
+    border-radius:8px;
+    text-decoration:none;
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="box">
+    <h2>Farmacia Pintar</h2>
+    <input id="user" placeholder="Usuario">
+    <input id="pass" type="password" placeholder="Contraseña">
+    <button onclick="login()">Entrar</button>
+    <p id="error"></p>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+
+<div class="top">
+  <span>Empleado</span>
+  <div>
+    <button onclick="logout()">Salir</button>
+    <span id="clock"></span>
+  </div>
+</div>
+
+<div class="grid">
+    <a class="btn" href="https://www.colfarmaonline.org.ar" target="_blank">COLEGIO</a>
+    <a class="btn" href="https://www.turnosdefarmacias.info/" target="_blank">TURNOS</a>
+    <a class="btn" href="https://script.google.com/macros/s/AKfycbz9FnNtkNbRNrqtIcoo-9aho_j6LBBeYVfP4ntA7OVbGxwwmblfqdPd6WjIAHltwDHOQw/exec" target="_blank">GENÉRICOS</a>
+</div>
+
+</div>
+
+<script>
+// HASH de "Farmaco00"
+const USER = "259";
+const PASS_HASH = "6b0e0d8bbd54d65d68f2d1c55d26ab9dd98ec6053b457769278ade41b1a086e5";
+
+let timeout;
+
+// HASH
+async function hash(text){
+    const enc = new TextEncoder().encode(text);
+    const buf = await crypto.subtle.digest("SHA-256", enc);
+    return Array.from(new Uint8Array(buf))
+        .map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+// LOGIN
+async function login(){
+    const u = document.getElementById("user").value;
+    const p = document.getElementById("pass").value;
+
+    const h = await hash(p);
+
+    if(u === USER && h === PASS_HASH){
+        login.style.display="none";
+        app.style.display="block";
+        startTimer();
+    } else {
+        error.innerText="Datos incorrectos";
+    }
+}
+
+// LOGOUT
+function logout(){
+    location.reload();
+}
+
+// TIMER
+function resetTimer(){
+    clearTimeout(timeout);
+    timeout = setTimeout(()=>{
+        alert("Sesión cerrada por inactividad");
+        logout();
+    }, 600000);
+}
+
+function startTimer(){
+    ["click","mousemove","keypress"].forEach(e=>{
+        document.addEventListener(e,resetTimer);
+    });
+    resetTimer();
+}
+
+// RELOJ
+setInterval(()=>{
+    document.getElementById("clock").innerText =
+        new Date().toLocaleTimeString();
+},1000);
+</script>
+
+</body>
+</html>
