@@ -7,62 +7,126 @@
 
 <style>
 body {
-    margin:0;
+    margin: 0;
     font-family: Arial;
-    background: linear-gradient(135deg,#0f172a,#020617);
-    color:white;
+    background: linear-gradient(135deg, #0f172a, #020617);
+    color: white;
+    /* Añadimos un pequeño padding abajo para que los botones no tapen el texto en pantallas pequeñas */
+    padding-bottom: 40px; 
 }
 
 /* HEADER */
 .top {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
     background: rgba(0,0,0,0.3);
 }
 
 h1 {
-    margin:0;
-    font-size:1.5rem;
+    margin: 0;
+    font-size: 1.5rem;
 }
 
 /* GRID */
 .grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:15px;
-    padding:20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 20px;
 }
 
 .btn {
-    padding:25px 15px;
-    border-radius:12px;
-    text-align:center;
-    text-decoration:none;
-    color:white;
-    font-weight:bold;
-    transition:0.2s;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    padding: 25px 15px;
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
 .btn:hover {
-    transform:scale(1.05);
+    transform: scale(1.05);
 }
 
-/* COLORES */
-.c1{background:#3b82f6;}
-.c2{background:#22c55e;}
-.c3{background:#f59e0b;}
-.c4{background:#ef4444;}
-.c5{background:#06b6d4;}
-.c6{background:#9333ea;}
-.c7{background:#14b8a6;}
-.c8{background:#f43f5e;}
-.c9{background:#0ea5e9;}
-.c10{background:#64748b;}
+/* COLORES ÚNICOS PARA CADA BOTÓN PRINCIPAL */
+.c-recepcion  { background: #f59e0b; } /* Naranja */
+.c-youtube    { background: #ef4444; } /* Rojo (Requerido) */
+.c-mercadop   { background: #009ee3; } /* Azul (Requerido) */
+.c-genericos  { background: #8b5cf6; } /* Violeta claro */
+.c-pami       { background: #06b6d4; } /* Cian */
+.c-colegio    { background: #22c55e; } /* Verde (Requerido) */
+.c-plataforma { background: #475569; } /* Gris oscuro */
+.c-iosfa-r    { background: #14b8a6; } /* Verde azulado */
+.c-iosfa-a    { background: #d946ef; } /* Fucsia */
+.c-silfab     { background: #0ea5e9; } /* Celeste */
+.c-meppes     { background: #f43f5e; } /* Rosa fuerte */
+.c-turnos     { background: #3b82f6; } /* Azul claro */
+.c-farmasun   { background: #64748b; } /* Gris azulado */
+.c-mail       { background: #f97316; } /* Naranja fuerte */
+.c-osde       { background: #9333ea; } /* Púrpura */
+.c-rozman     { background: #10b981; } /* Verde esmeralda */
+
+/* ESTILOS DEL MODAL (VENTANA EMERGENTE) */
+.modal-overlay {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* COLORES BOTONES DEL MODAL */
+.btn-verde { background: #22c55e; }
+.btn-rojo { background: #ef4444; }
+
+/* FOOTER / ÚLTIMO CAMBIO */
+.footer-fecha {
+    position: fixed;
+    bottom: 10px;
+    right: 15px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4); /* Blanco semi-transparente */
+    z-index: 500;
+}
+
 </style>
 </head>
 
@@ -74,44 +138,58 @@ h1 {
 </div>
 
 <div class="grid">
-
-<a class="btn c3" href="https://docs.google.com/forms/d/e/1FAIpQLSdUhc3wLRfU9C6QzU5G2EuIo4CeXpHN_tO_REw4JvWJ__hsvA/viewform" target="_blank">RECEPCION COFASA</a>
-
-<a class="btn c5" href="https://www.youtube.com/" target="_blank">YOUTUBE</a>
-
-<a class="btn c1" href="https://www.mercadopago.com.ar/collections" target="_blank">MERCADO PAGO</a>
-
-<a class="btn c2" href="https://script.google.com/macros/s/AKfycbwzo61gQXhhQ-dDOKW52wBGx0-LI0wt5--GSAEhQBU-5YlnM9X1L3IrckqPt1MI7WfP-A/exec" target="_blank">GENÉRICOS</a>
-<a class="btn c3" href="https://script.google.com/macros/s/AKfycbzUO-P6VCYTYm2HUQpFC80pgUK7S01iYqx8qgHJ3xQByjxCifHYdcCuysrpxgPDRK8K5A/exec" target="_blank">AFILIADOS PAMI</a>
-
-
-<a class="btn c2" href="https://www.colfarmaonline.org.ar" target="_blank">COLEGIO</a>
-
-<a class="btn c4" href="http://pedido2.cofasa.com.ar/Account/LogOn?ReturnUrl=%2f" target="_blank">PLATAFORMA</a>
-
-<a class="btn c7" href="https://www.misvalidaciones.com.ar/" target="_blank">IOSFA RECETAS</a>
-
-<a class="btn c7" href="https://validador.iosfa.gob.ar/ValidadorSUA1" target="_blank">IOSFA AFILIADO</a>
-
-<a class="btn c9" href="https://silfab.turnosdefarmacias.info" target="_blank">SILFAB</a>
-
-<a class="btn c8" href="http://sistemasl.ioma.gba.gov.ar/sistemas/meppes_farmacias/index.php" target="_blank">MEPPES</a>
-
-<a class="btn c1" href="https://turnos.farmaciapintar.uk" target="_blank">TURNOS</a>
-
-<a class="btn c10" href="https://app.drogueriafarmasun.com.ar/login" target="_blank">FARMASUN</a>
-
-<a class="btn c4" href="https://mail.google.com/mail/u/1/" target="_blank">MAIL</a>
-
-<a class="btn c6" href="https://extranet.osde.com.ar/" target="_blank">OSDE</a>
-<a class="btn c6" href="https://script.google.com/macros/s/AKfycbxIJEUw-NSdU41qkWa_0bLOaMC6sJkUIHcQDY7kHefdHvue43ifRPthSPBSFrJoHFg8/exec" target="_blank">ROZMAN</a>
+    <a class="btn c-recepcion" href="https://docs.google.com/forms/d/e/1FAIpQLSdUhc3wLRfU9C6QzU5G2EuIo4CeXpHN_tO_REw4JvWJ__hsvA/viewform" target="_blank">RECEPCION COFASA</a>
+    <a class="btn c-youtube" href="https://www.youtube.com/" target="_blank">YOUTUBE</a>
+    <a class="btn c-mercadop" href="https://www.mercadopago.com.ar/collections" target="_blank">MERCADO PAGO</a>
+    <a class="btn c-genericos" href="https://script.google.com/macros/s/AKfycbwzo61gQXhhQ-dDOKW52wBGx0-LI0wt5--GSAEhQBU-5YlnM9X1L3IrckqPt1MI7WfP-A/exec" target="_blank">GENÉRICOS</a>
+    <a class="btn c-pami" href="https://script.google.com/macros/s/AKfycbzUO-P6VCYTYm2HUQpFC80pgUK7S01iYqx8qgHJ3xQByjxCifHYdcCuysrpxgPDRK8K5A/exec" target="_blank">AFILIADOS PAMI</a>
+    <a class="btn c-colegio" href="https://www.colfarmaonline.org.ar" target="_blank">COLEGIO</a>
+    
+    <!-- Botón que abre el modal de Plataforma -->
+    <a class="btn c-plataforma" onclick="abrirModal(event)">PLATAFORMA</a>
+    
+    <a class="btn c-iosfa-r" href="https://www.misvalidaciones.com.ar/" target="_blank">IOSFA RECETAS</a>
+    <a class="btn c-iosfa-a" href="https://validador.iosfa.gob.ar/ValidadorSUA1" target="_blank">IOSFA AFILIADO</a>
+    <a class="btn c-silfab" href="https://silfab.turnosdefarmacias.info" target="_blank">SILFAB</a>
+    <a class="btn c-meppes" href="http://sistemasl.ioma.gba.gov.ar/sistemas/meppes_farmacias/index.php" target="_blank">MEPPES</a>
+    <a class="btn c-turnos" href="https://turnos.farmaciapintar.uk" target="_blank">TURNOS</a>
+    <a class="btn c-farmasun" href="https://app.drogueriafarmasun.com.ar/login" target="_blank">FARMASUN</a>
+    <a class="btn c-mail" href="https://mail.google.com/mail/u/1/" target="_blank">MAIL</a>
+    <a class="btn c-osde" href="https://extranet.osde.com.ar/" target="_blank">OSDE</a>
+    <a class="btn c-rozman" href="https://script.google.com/macros/s/AKfycbxIJEUw-NSdU41qkWa_0bLOaMC6sJkUIHcQDY7kHefdHvue43ifRPthSPBSFrJoHFg8/exec" target="_blank">ROZMAN</a>
 </div>
 
+<!-- VENTANA EMERGENTE (MODAL) PARA PLATAFORMA -->
+<div class="modal-overlay" id="modalPlataforma" onclick="cerrarModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="cerrarModal(event)">&times;</span>
+        <h2>Opciones de Plataforma</h2>
+        
+        <a class="btn btn-verde" href="http://pedido1.cofasa.com.ar/Account/LogOn?ReturnUrl=%2f" target="_blank">PEDIDO 1</a>
+        <a class="btn btn-rojo" href="http://pedido2.cofasa.com.ar/Account/LogOn?ReturnUrl=%2f" target="_blank">PEDIDO 2 (NO USAR SI ANDA EL 1)</a>
+        <a class="btn btn-rojo" href="http://servicios.cofasa.com.ar/COFASA/Home/SeleccionarCliente?Areas=COFASA" target="_blank">PEDIDO 3 (NO USAR SI ANDAN LOS OTROS DOS)</a>
+    </div>
+</div>
+
+<!-- TEXTO DE ÚLTIMO CAMBIO -->
+<div class="footer-fecha">ultimo cambio 25/06/26 8:33am</div>
+
 <script>
+// Reloj
 setInterval(()=>{
-    document.getElementById("clock").innerText =
-        new Date().toLocaleTimeString();
-},1000);
+    document.getElementById("clock").innerText = new Date().toLocaleTimeString();
+}, 1000);
+
+// Funciones para abrir y cerrar la ventana emergente
+function abrirModal(e) {
+    e.preventDefault();
+    document.getElementById('modalPlataforma').style.display = 'flex';
+}
+
+function cerrarModal(e) {
+    if(e) e.preventDefault();
+    document.getElementById('modalPlataforma').style.display = 'none';
+}
 </script>
 
 </body>
