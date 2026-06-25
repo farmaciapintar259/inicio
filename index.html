@@ -1,3 +1,10 @@
+¡Entendido! Tenés toda la razón, es mucho más práctico que el menú se cierre solo una vez que elegís a dónde querés ir.
+
+Para solucionarlo, agregué una pequeña instrucción (`onclick`) a los tres botones dentro de la ventana emergente. Ahora, cuando hagas clic en cualquiera de ellos, el enlace se abrirá en una pestaña nueva y, al mismo tiempo, la ventana flotante se ocultará automáticamente en tu pantalla principal.
+
+Aquí tenés el código completo con la modificación aplicada:
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,7 +18,6 @@ body {
     font-family: Arial;
     background: linear-gradient(135deg, #0f172a, #020617);
     color: white;
-    /* Añadimos un pequeño padding abajo para que los botones no tapen el texto en pantallas pequeñas */
     padding-bottom: 40px; 
 }
 
@@ -123,7 +129,7 @@ h1 {
     bottom: 10px;
     right: 15px;
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4); /* Blanco semi-transparente */
+    color: rgba(255, 255, 255, 0.4); 
     z-index: 500;
 }
 
@@ -145,7 +151,6 @@ h1 {
     <a class="btn c-pami" href="https://script.google.com/macros/s/AKfycbzUO-P6VCYTYm2HUQpFC80pgUK7S01iYqx8qgHJ3xQByjxCifHYdcCuysrpxgPDRK8K5A/exec" target="_blank">AFILIADOS PAMI</a>
     <a class="btn c-colegio" href="https://www.colfarmaonline.org.ar" target="_blank">COLEGIO</a>
     
-    <!-- Botón que abre el modal de Plataforma -->
     <a class="btn c-plataforma" onclick="abrirModal(event)">PLATAFORMA</a>
     
     <a class="btn c-iosfa-r" href="https://www.misvalidaciones.com.ar/" target="_blank">IOSFA RECETAS</a>
@@ -159,19 +164,17 @@ h1 {
     <a class="btn c-rozman" href="https://script.google.com/macros/s/AKfycbxIJEUw-NSdU41qkWa_0bLOaMC6sJkUIHcQDY7kHefdHvue43ifRPthSPBSFrJoHFg8/exec" target="_blank">ROZMAN</a>
 </div>
 
-<!-- VENTANA EMERGENTE (MODAL) PARA PLATAFORMA -->
 <div class="modal-overlay" id="modalPlataforma" onclick="cerrarModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <span class="close-btn" onclick="cerrarModal(event)">&times;</span>
         <h2>Opciones de Plataforma</h2>
         
-        <a class="btn btn-verde" href="http://pedido1.cofasa.com.ar/Account/LogOn?ReturnUrl=%2f" target="_blank">PEDIDO 1</a>
-        <a class="btn btn-rojo" href="http://pedido2.cofasa.com.ar/Account/LogOn?ReturnUrl=%2f" target="_blank">PEDIDO 2 (NO USAR SI ANDA EL 1)</a>
-        <a class="btn btn-rojo" href="http://servicios.cofasa.com.ar/COFASA/Home/SeleccionarCliente?Areas=COFASA" target="_blank">PEDIDO 3 (NO USAR SI ANDAN LOS OTROS DOS)</a>
+        <a class="btn btn-verde" href="http://pedido1.cofasa.com.ar/Account/LogOn?ReturnUrl=%2f" target="_blank" onclick="cerrarModalLink()">PEDIDO 1</a>
+        <a class="btn btn-rojo" href="http://pedido2.cofasa.com.ar/Account/LogOn?ReturnUrl=%2f" target="_blank" onclick="cerrarModalLink()">PEDIDO 2 (NO USAR SI ANDA EL 1)</a>
+        <a class="btn btn-rojo" href="http://servicios.cofasa.com.ar/COFASA/Home/SeleccionarCliente?Areas=COFASA" target="_blank" onclick="cerrarModalLink()">PEDIDO 3 (NO USAR SI ANDAN LOS OTROS DOS)</a>
     </div>
 </div>
 
-<!-- TEXTO DE ÚLTIMO CAMBIO -->
 <div class="footer-fecha">ultimo cambio 25/06/26 8:33am</div>
 
 <script>
@@ -190,7 +193,14 @@ function cerrarModal(e) {
     if(e) e.preventDefault();
     document.getElementById('modalPlataforma').style.display = 'none';
 }
+
+// Función específica para cerrar el modal al tocar un link sin bloquear que se abra la nueva pestaña
+function cerrarModalLink() {
+    document.getElementById('modalPlataforma').style.display = 'none';
+}
 </script>
 
 </body>
 </html>
+
+```
